@@ -13,5 +13,5 @@ Ao longo dos projetos, busco aplicar e aprimorar meus conhecimentos em:
 
 ## 📁 Projetos
 
-* [01 - Mini RPG](link-para-a-pasta-do-projeto): Um sistema simples de turnos e ataques simulando um RPG de mesa, focado em demonstrar Herança e Polimorfismo.
+* [01 - Mini RPG]([link-para-a-pasta-do-projeto](https://github.com/AndreLuismain/Java-Projects/tree/41b98714b4a71edc90d6bf4f39a7432e403f7977/01%20Mini%20RPG)): Um sistema simples de turnos e ataques simulando um RPG de mesa, focado em demonstrar Herança e Polimorfismo.
 * *(Mais projetos em breve...)*
