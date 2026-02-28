@@ -11,7 +11,7 @@ Ao longo dos projetos, busco aplicar e aprimorar meus conhecimentos em:
 - **Estruturas de Dados:** Uso de coleções como `ArrayList`, manipulação de arrays, etc.
 - **Boas Práticas:** Código limpo, organização em pacotes e versionamento.
 
-## 📁 Projetos
+## Projetos
 
 * [01 - Mini RPG](https://github.com/AndreLuismain/Java-Projects/tree/41b98714b4a71edc90d6bf4f39a7432e403f7977/01%20Mini%20RPG): Um sistema simples de turnos e ataques simulando um RPG de mesa, focado em demonstrar Herança e Polimorfismo.
 * *(Mais projetos em breve...)*
