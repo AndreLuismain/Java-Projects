@@ -1,8 +1,8 @@
-# ⚔️ Sistema Mini RPG - Desafio 01
+#  Sistema Mini RPG - Desafio 01
 
 Um simulador simples de ataques de RPG baseado em turnos e classes, desenvolvido inteiramente em **Java**. Este projeto tem como objetivo principal demonstrar a aplicação prática de conceitos fundamentais de **Programação Orientada a Objetos (POO)**.
 
-## 🎯 Funcionalidades
+##  Funcionalidades
 
 - Criação de personagens com atributos únicos (Nome, Vida, Força, Magia, Mana).
 - Sistema de classes específicas (`Guerreiro` e `Mago`) derivadas de uma classe base.
@@ -10,7 +10,7 @@ Um simulador simples de ataques de RPG baseado em turnos e classes, desenvolvido
 - Sistema de verificação de Mana para os Magos (o ataque só ocorre se houver mana suficiente).
 - Rastreador global de personagens instanciados.
 
-## 🧠 Conceitos Técnicos Aplicados
+##  Conceitos Técnicos Aplicados
 
 Este repositório serve como uma demonstração prática dos seguintes conceitos do Java:
 
