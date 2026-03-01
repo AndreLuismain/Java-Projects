@@ -14,4 +14,4 @@ Ao longo dos projetos, busco aplicar e aprimorar meus conhecimentos em:
 ## Projetos
 
 * [01 - Mini RPG](https://github.com/AndreLuismain/Java-Projects/tree/41b98714b4a71edc90d6bf4f39a7432e403f7977/01%20Mini%20RPG): Um sistema simples de turnos e ataques simulando um RPG de mesa, focado em demonstrar Herança e Polimorfismo.
-* *(Mais projetos em breve...)*
+* **[02 - Mini RPG API](./api):** Uma API RESTful que expande o sistema de RPG para o ambiente web, implementando persistência em banco de dados relacional (PostgreSQL) e documentação interativa com Swagger.
