@@ -1,8 +1,13 @@
 package br.com.minirpg.api.controller;
 
+import br.com.minirpg.api.dto.PersonagemRequestDTO;
+import br.com.minirpg.api.dto.PersonagemUpdateDTO;
 import br.com.minirpg.api.model.Personagem;
 import br.com.minirpg.api.repository.PersonagemRepository;
+import br.com.minirpg.api.service.PersonagemService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,35 +19,53 @@ public class PersonagemController {
     @Autowired
     private PersonagemRepository repository;
 
-    // O que já tínhamos (Busca todos)
+    @Autowired
+    private PersonagemService personagemService; // <-- Adicione esta linha
+
     @GetMapping
     public List<Personagem> listarTodos() {
         return repository.findAll();
     }
 
-    // A MÁGICA NOVA: Cadastrando um personagem
     @PostMapping
-    public Personagem criar(@RequestBody Personagem personagem) {
-        return repository.save(personagem); // O Spring faz o INSERT automático!
+    public Personagem criar(@Valid @RequestBody PersonagemRequestDTO dto) {
+        Personagem personagem = new Personagem();
+        personagem.setNome(dto.nome());
+        personagem.setClasse(dto.classe());
+        personagem.setNivel(dto.nivel());
+        personagem.setPontosVida(dto.pontosVida());
+        personagem.setAgilidade(dto.agilidade());
+
+        return repository.save(personagem);
     }
+
     @PutMapping("/{id}")
-    public Personagem atualizar(@PathVariable Long id, @RequestBody Personagem personagemAtualizado) {
-        // 1. Busca no banco pelo ID. Se não achar, dá um erro genérico (vamos melhorar isso depois)
-        Personagem existente = repository.findById(id).orElseThrow();
+    public ResponseEntity<Personagem> atualizar(@PathVariable Long id, @Valid @RequestBody PersonagemUpdateDTO dto) {
+        return repository.findById(id).map(personagem -> {
+            personagem.setNome(dto.nome());
+            personagem.setNivel(dto.nivel());
+            personagem.setPontosVida(dto.pontosVida());
+            personagem.setAgilidade(dto.agilidade());
 
-        // 2. Atualiza os dados do objeto em memória
-        existente.setNome(personagemAtualizado.getNome());
-        existente.setClasse(personagemAtualizado.getClasse());
-        existente.setNivel(personagemAtualizado.getNivel());
-        existente.setPontosVida(personagemAtualizado.getPontosVida());
-
-        // 3. Salva por cima (O Spring sabe que é UPDATE porque o ID já existe)
-        return repository.save(existente);
+            Personagem atualizado = repository.save(personagem);
+            return ResponseEntity.ok(atualizado);
+        }).orElse(ResponseEntity.notFound().build());
     }
 
-    // A MÁGICA NOVA: Deletar (DELETE)
     @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Long id) {
-        repository.deleteById(id); // Monta o "DELETE FROM personagens WHERE id = ?"
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        if (!repository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        repository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+    // A MÁGICA DA BATALHA: Rota customizada
+    @PostMapping("/{idAtacante}/atacar/{idAlvo}")
+    public ResponseEntity<String> atacar(@PathVariable Long idAtacante, @PathVariable Long idAlvo) {
+        // O garçom repassa o pedido para o cozinheiro (Service)
+        String resultadoDaBatalha = personagemService.atacar(idAtacante, idAlvo);
+
+        return ResponseEntity.ok(resultadoDaBatalha);
     }
 }
