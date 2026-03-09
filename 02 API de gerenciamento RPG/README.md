@@ -1,53 +1,60 @@
-# RPG Character Management API
+# Mini RPG API
 
-Este projeto consiste em uma **API REST** funcional desenvolvida para o gerenciamento de personagens em um ambiente de RPG. Ele representa a evolução técnica dos meus estudos de **Programação Orientada a Objetos (POO)**, transicionando de aplicações via terminal para um ecossistema Web completo com persistência de dados real.
+Esta é uma API REST desenvolvida para o gerenciamento de personagens e simulação de mecânicas de RPG. O projeto utiliza tecnologias de mercado para garantir persistência de dados, escalabilidade via containers e documentação automatizada.
 
-O desenvolvimento desta API faz parte da minha trajetória no curso de **Bacharelado em Sistemas de Informação (BSI)** no **ICMC - USP**.
+## Links do Projeto
+* **Homepage da Aplicação:** https://java-projects-y09s.onrender.com
+* **Documentação Swagger:** https://java-projects-y09s.onrender.com/swagger-ui/index.html
 
-
+## Funcionalidades
+* **CRUD de Personagens:** Operações completas de criação, leitura, atualização e exclusão de personagens.
+* **Mecânicas de RPG:** Gerenciamento de atributos como força, defesa e pontos de vida.
+* **Segurança de Dados:** Implementação de DTOs (Data Transfer Objects) para isolar a camada de persistência da camada de apresentação.
+* **Documentação Interativa:** Interface Swagger/OpenAPI para testes de endpoints em tempo real.
+* **Persistência Relacional:** Banco de dados PostgreSQL configurado para ambiente de produção no Render.
 
 ## Tecnologias Utilizadas
+* **Java 17:** Versão de longo suporte (LTS) utilizada para o desenvolvimento da lógica.
+* **Spring Boot 3.3.4:** Framework para construção da arquitetura backend.
+* **Spring Data JPA:** Abstração para manipulação do banco de dados e mapeamento objeto-relacional.
+* **PostgreSQL:** Banco de dados relacional utilizado para persistência em nuvem.
+* **Docker:** Containerização da aplicação para garantir paridade entre os ambientes de desenvolvimento e produção.
+* **Lombok:** Biblioteca para redução de código repetitivo e aumento da produtividade.
+* **Render:** Plataforma Cloud utilizada para o deploy da aplicação e do banco de dados através de infraestrutura como código (Dockerfile).
 
-* **Linguagem:** Java (versões 17 ou 21).
-* **Framework Core:** Spring Boot 3.
-* **Persistência de Dados:** Spring Data JPA.
-* **Banco de Dados:** PostgreSQL (Relacional).
-* **Documentação:** Swagger UI (OpenAPI 3).
-* **Gerenciador de Dependências:** Maven.
+## Estrutura de Camadas
+A aplicação segue o padrão de arquitetura em camadas para garantir a separação de responsabilidades:
+1. **Controller:** Responsável por expor os endpoints e gerenciar as requisições HTTP.
+2. **Service:** Camada que contém as regras de negócio e a lógica de processamento do RPG.
+3. **Repository:** Interface que estende o JPARepository para comunicação direta com o banco de dados.
+4. **Model/Entity:** Representação das entidades do domínio mapeadas para tabelas do PostgreSQL.
+5. **DTO:** Objetos de transferência de dados utilizados para garantir a integridade da API.
 
-## Funcionalidades (CRUD)
-
-A API permite realizar todas as operações fundamentais de um sistema de gestão de dados:
-
-* **Create (Post):** Cadastro de novos personagens com atributos de nome, classe, nível e pontos de vida.
-* **Read (Get):** Listagem completa de todos os personagens persistidos no banco de dados.
-* **Update (Put):** Atualização dinâmica de atributos, permitindo a evolução de níveis e status dos personagens.
-* **Delete (Delete):** Remoção de registros específicos do banco de dados.
-
-## Como Rodar o Projeto
+## Como Executar o Projeto Localmente
 
 ### Pré-requisitos
-1. Possuir o **PostgreSQL** instalado e configurado na máquina local.
-2. Configurar as credenciais de acesso (usuário e senha) no arquivo `src/main/resources/application.properties`.
-3. Utilizar uma IDE compatível (como IntelliJ IDEA) para rodar o projeto Maven.
+* JDK 17
+* Maven 3.x
+* Docker (opcional)
 
-### Execução
-1. Clone este repositório em sua máquina.
-2. Execute a classe principal `ApiApplication.java`.
-3. O servidor será iniciado por padrão na porta **8080**.
+### Passo a Passo
+1. Clone este repositório:
+   git clone https://github.com/AndreLuismain/Java-Projects.git
 
-## Documentação Interativa
+2. Acesse o diretório do projeto:
+   cd "02 API de gerenciamento RPG/api"
 
-A API utiliza o **Swagger** para documentação automática, permitindo testar todas as rotas diretamente pelo navegador, sem necessidade de ferramentas externas como Postman ou Insomnia.
+3. Compile o projeto e gere o arquivo executável:
+   mvn clean install
 
-Com a aplicação em execução, acesse:
- `http://localhost:8080/swagger-ui/index.html`
+4. Execute a aplicação:
+   mvn spring-boot:run
 
----
+A API estará disponível em http://localhost:8080.
 
-## Sobre o Autor
+## Autor
+André Luís
 
-**André Luís** 
-* Graduando em **Sistemas de Informação (BSI)**  pelo **ICMC - USP**.
-* **Tecnólogo em Redes de Computadores** pelo **SENAI**.
-* Foco em desenvolvimento **Fullstack Java** e arquitetura de sistemas escaláveis.
+Estudante de Sistemas de Informação - ICMC/USP
+
+GitHub: https://github.com/AndreLuismain
