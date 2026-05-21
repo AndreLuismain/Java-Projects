@@ -3,6 +3,15 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .kotlin
+*.class
+
+out/
+
+bin/
+
+.idea/
+
+.vscode/
 
 ### Eclipse ###
 .apt_generated
