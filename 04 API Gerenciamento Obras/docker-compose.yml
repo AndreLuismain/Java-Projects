@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  postgres-db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: estudos_db
+    ports:
+      - "5435:5432"
