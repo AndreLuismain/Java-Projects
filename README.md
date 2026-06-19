@@ -10,9 +10,10 @@ Ao longo dos projetos, busco aplicar e aprimorar meus conhecimentos em:
 - **Programação Orientada a Objetos (POO):** Classes, Objetos, Herança, Polimorfismo, Encapsulamento e Abstração.
 - **Estruturas de Dados:** Uso de coleções como `ArrayList`, manipulação de arrays, etc.
 - **Boas Práticas:** Código limpo, organização em pacotes e versionamento.
+- **Escalabilidade:** Escalonamento para análise e manutenção de grandes sistemas e bases de dados.
 
 ## Projetos
-
-* **[01 - Mini RPG](https://github.com/AndreLuismain/Java-Projects/tree/41b98714b4a71edc90d6bf4f39a7432e403f7977/01%20Mini%20RPG):** Um sistema simples de turnos e ataques simulando um RPG de mesa, focado em demonstrar Herança e Polimorfismo.
-* **[02 - Mini RPG API](https://github.com/AndreLuismain/Java-Projects/tree/65ed405a1fa6c5b184f03bc9ace73a878dd3a7ad/02%20API%20de%20gerenciamento%20RPG):** Uma API RESTful que expande o sistema de RPG para o ambiente web, implementando persistência em banco de dados relacional (PostgreSQL) e documentação interativa com Swagger.
+* **[04 - Gerenciamento de Obras, Distribuidoras e Custos](https://github.com/AndreLuismain/Java-Projects/tree/main/04%20API%20Gerenciamento%20Obras):** Uma API RESTful que analisa os dados de Distribuidoras, Obras e Custos com interligaçao e análise encadeana.
 * **[03 - Analisador Dados Aneel(CSV)](https://github.com/AndreLuismain/Java-Projects/tree/main/03%20Analisador%20Dados%20Aneel):** Um analisador generico de CSV com filtros e streams de busca.
+* **[02 - Mini RPG API](https://github.com/AndreLuismain/Java-Projects/tree/65ed405a1fa6c5b184f03bc9ace73a878dd3a7ad/02%20API%20de%20gerenciamento%20RPG):** Uma API RESTful que expande o sistema de RPG para o ambiente web, implementando persistência em banco de dados relacional (PostgreSQL) e documentação interativa com Swagger.\
+* **[01 - Mini RPG](https://github.com/AndreLuismain/Java-Projects/tree/41b98714b4a71edc90d6bf4f39a7432e403f7977/01%20Mini%20RPG):** Um sistema simples de turnos e ataques simulando um RPG de mesa, focado em demonstrar Herança e Polimorfismo.
