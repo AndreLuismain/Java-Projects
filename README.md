@@ -1,71 +1,80 @@
 # Meus Projetos em Java
 
-Bem-vindo ao meu repositório central de projetos e estudos práticos em **Java**!
+Bem-vindo ao repositório de projetos em **Java**! 
 
-Este espaço é dedicado a documentar minha evolução na linguagem e a construção contínua de uma base técnica sólida para desenvolvimento **Backend**, sistemas distribuídos e integração com **Inteligência Artificial**. Aqui você encontrará desde fundamentos essenciais de computação até APIs corporativas robustas e prontas para produção.
-
----
-
-## 🛠️ Tecnologias e Conceitos Dominados
-
-- **Java Moderno (Java 21 LTS):** Records, Pattern Matching, Streams, lambdas e concurrency.
-- **Ecossistema Spring:** Spring Boot 3+, Spring Web, Spring WebFlux (chamadas assíncronas e reativas), Spring Data JPA e Bean Validation.
-- **Inteligência Artificial Generativa:** Integração com **Google Gemini Pro** via APIs REST para análise semântica, sumarização e classificação com engenharia de prompts defensiva.
-- **Segurança de Aplicações:** Mitigação de vulnerabilidades como **SSRF** (Server-Side Request Forgery), sanitização de HTML/DOM e validação de payloads.
-- **Bancos de Dados & Migrações:** PostgreSQL, versionamento de schemas com **Flyway** e testes em memória com H2.
-- **Web Scraping & Normalização:** Extração de conteúdo estruturado com **Jsoup** e deduplicação via hashing criptográfico (SHA-256).
-- **Engenharia de Software:** Arquitetura em camadas, princípios SOLID, Clean Code e documentação viva com **OpenAPI (Swagger UI)**.
-- **Testes Automatizados:** Testes unitários e de integração com **JUnit 5**, **Mockito**, **WebMvcTest** e **Testcontainers**.
+Este espaço é dedicado a documentar minha evolução na linguagem e a construção de uma sólida base de engenharia de software para desenvolvimento **Backend**, **Sistemas Distribuídos**, **Microsserviços** e **Arquiteturas Integradas com Inteligência Artificial**.
 
 ---
 
-## 🚀 Portfólio de Projetos
+## 🚀 Tópicos e Conceitos Abordados
 
-### [05 - Agente Analisador de Editais de IC](analisador-editais-ic)
-> **Stack:** Java 21 | Spring Boot 3.4 | Spring WebFlux | PostgreSQL | Flyway | Google Gemini API | Jsoup | Docker | OpenAPI
-* API REST inteligente projetada para coletar editais e oportunidades acadêmicas (PIBIC, bolsas e estágios) na web via web scraping assíncrono.
-* Realiza a sanitização de conteúdo HTML com Jsoup, protege contra ataques SSRF com inspeção rigorosa de DNS/IPs privados e calcula hashes SHA-256 para deduplicação.
-* Integra-se ao **Google Gemini Pro** com contratos estritos em JSON para sintetizar requisitos, identificar riscos e classificar a compatibilidade (`HIGH_MATCH`, `MEDIUM_MATCH`, etc.) com o perfil do estudante/pesquisador.
-* Inclui suporte a processamento em lote (Batch Jobs), execução em background via thread pools configurados e suíte com 18 testes automatizados aprovados.
-
----
-
-### [04 - Gerenciamento de Obras, Distribuidoras e Custos](04%20API%20Gerenciamento%20Obras)
-> **Stack:** Java 21 | Spring Boot | Spring Data JPA | PostgreSQL | Flyway | OpenAPI / Swagger
-* API RESTful voltada para o setor de infraestrutura e distribuição, correlacionando dados de distribuidoras elétricas, obras e centros de custo em fluxo analítico encadeado.
-* Implementa controle de transações, validações de integridade relacional e documentação Swagger interativa.
+Ao longo dos projetos, aplico padrões de design, boas práticas e conceitos avançados de engenharia:
+- **Padrões Arquiteturais:** Domain-Driven Design (DDD), Transactional Outbox, Append-Only Ledger, API Gateway, ETL Pipelines.
+- **Concorrência e Transacionalidade:** Bloqueio pessimista de escrita (`PESSIMISTIC_WRITE`), ordenação lexicográfica determinística anti-deadlock e controle otimista (`@Version`).
+- **Resiliência e Reatividade:** Spring WebFlux, WebClient não-bloqueante, Rate Limiting com algoritmo Token Bucket e fallbacks heurísticos.
+- **APIs RESTful e Validação:** Jakarta Bean Validation, contratos JSON padronizados com rastreabilidade via `X-Correlation-Id` e `traceId`.
+- **Qualidade e Testes:** Testes unitários abrangentes com JUnit 5 e Mockito, cobrindo cenários felizes, borda, concorrência e idempotência.
 
 ---
 
-### [03 - Analisador Dados Aneel (CSV)](03%20Analisador%20Dados%20Aneel)
-> **Stack:** Java | Streams API | File I/O | Manipulação de Dados
-* Ferramenta analítica de alta performance para processamento e filtragem de grandes volumes de dados públicos da ANEEL em formato CSV.
-* Demonstra uso avançado de Java Streams, predicates customizados e manipulação eficiente de I/O em disco.
+## 📂 Projetos no Repositório
+
+### 🎯 Microsserviços e Engenharia de Software (Projetos 05 a 11)
+
+* **[11 - Motor de Recomendação de Pesquisas Acadêmicas](11-motor-recomendacao-pesquisas):**  
+  API Java com pipeline ETL (Extract com aliases heterogêneos, Transform com normalização canônica, Deduplicate por hash SHA-256 e Load), além de motor híbrido de recomendação combinando pontuação determinística (mínimo 60% do peso) com enriquecimento semântico.
+  - *Stack:* Java 21, Spring Boot 3.4+, Spring Data JPA, H2/PostgreSQL.
+
+* **[10 - Agente Documentador de Código Legado](10-agente-documentador-legado):**  
+  API REST que recebe arquivos legados (COBOL, Pascal, C, etc.), valida integridade contra path traversal e extensões perigosas, sanitiza credenciais e utiliza agentes de IA / analisadores sintáticos para gerar documentação técnica completa em Markdown estruturado, com cache por hash SHA-256.
+  - *Stack:* Java 21, Spring Boot 3.4+, Spring Web, Data JPA, Gemini API / Heurística estruturada.
+
+* **[09 - API Gateway de Agentes](09-api-gateway-agentes):**  
+  Gateway reativo que avalia a complexidade textual em tempo de execução (caracteres, estimativa de tokens, quebras estruturais e palavras-chave técnicas) e despacha requisições para processadores rápidos ou agentes robustos. Inclui rate limiter in-memory baseado no algoritmo Token Bucket (`429 Too Many Requests` + `Retry-After`) e propagação de Correlation ID.
+  - *Stack:* Java 21, Spring Boot 3.4+, Spring WebFlux, Reactor, WebClient.
+
+* **[08 - Simulador de Transações Pix](08-simulador-transacoes-pix):**  
+  API de carteira virtual com rigor financeiro (valores estritamente em centavos inteiros), bloqueio pessimista determinístico ordenado por UUID para eliminação de deadlocks, livro-razão imutável (append-only ledger), idempotência estrita via cabeçalho `Idempotency-Key` e padrão Transactional Outbox para eventos de transferências acima do limite de segurança.
+  - *Stack:* Java 21, Spring Boot 3.4+, Spring Data JPA, Flyway, H2/PostgreSQL.
+
+* **[07 - Agendamento de Laboratórios e Salas](07-agendamento-laboratorios-salas):**  
+  Microsserviço de reservas de recursos físicos acadêmicos com prevenção de sobreposição de intervalos temporais via bloqueio pessimista no banco de dados (`findByIdWithLock`), validações de antecedência/duração e exportação de relatórios semanais de utilização em formato CSV em conformidade com o padrão RFC 4180.
+  - *Stack:* Java 21, Spring Boot 3.4+, Spring Data JPA, H2/PostgreSQL.
+
+* **[06 - API de Orquestração de Relatórios para IC](06-api-orquestracao-relatorios-ic):**  
+  Microsserviço que processa logs semanais de pesquisa de Iniciação Científica, categoriza atividades de forma inteligente (Pesquisa, Desenvolvimento, Estudo, Reunião, Documentação) e orquestra a geração de relatórios consolidados em Markdown prontos para submissão a agências de fomento.
+  - *Stack:* Java 21, Spring Boot 3.4+, Spring Web, Data JPA, H2/PostgreSQL.
+
+* **[05 - Agente Analisador de Editais de IC](analisador-editais-ic):**  
+  API Java com Spring Boot que coleta editais públicos, extrai conteúdo com Jsoup e usa inteligência artificial para resumir, analisar elegibilidade e classificar oportunidades de pesquisa conforme o perfil do estudante.
+  - *Stack:* Java 21, Spring Boot 3.4+, Jsoup, Spring Data JPA, Gemini Pro / Heurística.
 
 ---
 
-### [02 - Mini RPG API](02%20API%20de%20gerenciamento%20RPG)
-> **Stack:** Java | Spring Boot | Spring Data JPA | PostgreSQL | Swagger
-* Evolução do sistema de RPG para o ecossistema web, expondo endpoints REST para controle de personagens, inventários e sessões.
-* Persistência em banco de dados relacional e documentação interativa.
+### 🧩 Fundamentos e Primeiras APIs (Projetos 01 a 04)
+
+* **[04 - Gerenciamento de Obras, Distribuidoras e Custos](04%20API%20Gerenciamento%20Obras):**  
+  API RESTful para análise de dados interligados entre distribuidoras elétricas, obras e custos encadeados.
+* **[03 - Analisador de Dados Aneel (CSV)](03%20Analisador%20Dados%20Aneel):**  
+  Processador e analisador de arquivos CSV governamentais com filtros e agregação utilizando Java Streams.
+* **[02 - API de Gerenciamento RPG](02%20API%20de%20gerenciamento%20RPG):**  
+  API RESTful com persistência relacional (PostgreSQL), Swagger/OpenAPI e regras de domínio de RPG.
+* **[01 - Mini RPG](01%20Mini%20RPG):**  
+  Simulador em linha de comando focado na aplicação pura de Programação Orientada a Objetos (Herança, Polimorfismo, Encapsulamento).
 
 ---
 
-### [01 - Mini RPG](01%20Mini%20RPG)
-> **Stack:** Java Core | POO | Algoritmos
-* Sistema de batalha em turnos simulando mecânicas de RPG de mesa.
-* Focado em demonstrar na prática os pilares da Programação Orientada a Objetos: **Herança**, **Polimorfismo**, **Encapsulamento** e **Abstração**.
+## 🛠️ Como Executar os Projetos
 
----
-
-## 📦 Como Clonar e Executar
+Cada microsserviço (projetos 05 a 11) é um projeto Maven autônomo. Para executá-los ou rodar os testes:
 
 ```bash
-# Clonar o repositório
-git clone https://github.com/AndreLuismain/Java-Projects.git
+# Entrar na pasta do projeto desejado:
+cd 08-simulador-transacoes-pix
 
-# Acessar a pasta
-cd Java-Projects
+# Executar testes unitários e de integração:
+./mvnw clean test
+
+# Inicializar o serviço:
+./mvnw spring-boot:run
 ```
-
-Para instruções específicas de execução de cada projeto (incluindo subida de banco via Docker e execução com Maven Wrapper), consulte o arquivo `README.md` localizado no diretório de cada aplicação.
