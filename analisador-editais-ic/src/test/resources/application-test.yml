@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
+  flyway:
+    enabled: false
+
+app:
+  gemini:
+    api-key: test-api-key
+    model: gemini-test
+    endpoint: http://localhost:8089/v1beta/models
+    connect-timeout-ms: 2000
+    read-timeout-ms: 5000
+    prompt-version: v1-test
+    mock-fallback: true
+  scraper:
+    connect-timeout-ms: 2000
+    read-timeout-ms: 5000
+    max-bytes: 1048576
+    rate-limit-ms: 100
+    max-redirects: 3
+    user-agent: "EditaisTestAgent/1.0"
