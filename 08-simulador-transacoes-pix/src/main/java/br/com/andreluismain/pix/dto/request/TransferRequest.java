@@ -18,3 +18,4 @@ public record TransferRequest(
         @Positive(message = "Valor deve ser estritamente maior que zero")
         Long amountInCents
 ) {}
+

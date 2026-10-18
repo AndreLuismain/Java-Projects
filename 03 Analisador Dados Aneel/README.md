@@ -1,28 +1,60 @@
-# Analisador de Dados da ANEEL (Java 21)
+# 03 · Analisador de Dados da ANEEL (Java 21 & Programação Funcional)
 
-Um processador robusto e genérico de arquivos CSV desenvolvido em **Java 21**, focado em analisar dados reais de usinas geradoras do Brasil disponibilizados pela ANEEL.
+Processador e analisador interativo de arquivos CSV desenvolvido em **Java 21 LTS**, projetado para ingerir, higienizar e agregar dados públicos de usinas geradoras de energia elétrica disponibilizados pela **ANEEL**.
 
-Este projeto foi construído aplicando conceitos avançados de Orientação a Objetos, Clean Code e as mais recentes features da linguagem Java.
+---
 
-## Tecnologias e Recursos Utilizados
+## 1. Objetivo do Projeto
 
-- **Java 21**: Uso de *Pattern Matching para switch* para eliminar casts verbosos e trazer mais segurança na tipagem.
-- **Records & Sealed Interfaces**: Modelagem de domínio imutável e controle estrito de herança (Fail-fast strategy).
-- **Generics `<T>` & Programação Funcional**: Leitor de CSV genérico com injeção de função (`Function<String, Optional<T>>`), garantindo flexibilidade para ler qualquer tipo de arquivo no futuro.
-- **Stream API & Lambdas**: Processamento, filtragem e agrupamento de dados em memória de forma performática.
-- **Estruturas de Dados**: Uso de `TreeMap` para ordenação automática e `LinkedList` para histórico.
-- **Exceções Customizadas**: Tratamento de erros de negócio (`Checked` e `Unchecked`) com *Try-with-resources* para evitar vazamento de memória.
+Realizar a leitura resiliente de bases tabulares brutas (`.csv`) contendo dados de geração elétrica, aplicando parsing manual tolerante a vírgulas internas entre aspas, validação *fail-fast* por linha e agregações analíticas em memória via **Java Stream API**.
 
-## Arquitetura do Sistema
+---
 
-O sistema é dividido nas seguintes responsabilidades:
-1. **Domínio:** Uso de `BaseDeDados` (Record) e categorização via interface selada `FonteEnergia` (`FonteRenovavel` e `FonteNaoRenovavel`).
-2. **Infraestrutura:** Classe genérica `LeitorCsv` agnóstica às regras de negócio.
-3. **Controle/Terminal:** Menu interativo para o usuário realizar buscas e extrair relatórios das potências por ano e tipo de geração.
+## 2. Conceitos e Recursos do Java 21 Aplicados
 
-## Como Executar
+* **Records & Imutabilidade:** Modelagem de domínio imutável com `BaseDeDados`, `FonteRenovavel` e `FonteNaoRenovavel`.
+* **Sealed Interfaces (`sealed` / `permits`):** Controle estrito da hierarquia de tipos de energia através da interface selada `FonteEnergia`.
+* **Pattern Matching for `switch` (Java 21):** Desestruturação segura de tipos (`case FonteRenovavel r -> ...`, `case FonteNaoRenovavel n -> ...`) sem necessidade de *downcasting* manual.
+* **Generics `<T>` e Alta Ordem:** O componente `LeitorCsv` é desacoplado do domínio e recebe a função de mapeamento `Function<String, Optional<T>>` (`central::converterLinha`).
+* **Stream API & Coleções Ordenadas:**
+  * Agrupamento e soma de potência instalada (`BigDecimal`) por ano utilizando `Collectors.groupingBy` com `TreeMap::new` e `Collectors.reducing`.
+  * Filtragem por sigla de geração (`EOL`, `UFV`, `CGH`, etc.) e redução monetária/numérica exata com `BigDecimal`.
+  * Histórico de comandos recentes limitado aos últimos 5 registros com `LinkedList<Integer>`.
+* **Tratamento de Exceções (`Checked` e `Unchecked`):**
+  * `ArquivoInvalidoException` (*checked*) para falhas de abertura de arquivo com *try-with-resources* (`BufferedReader`).
+  * `LinhaCorrompidaException` (*unchecked*) para descarte resiliente de registros malformados sem interromper o processamento do lote.
 
-1. Clone o repositório.
-2. Certifique-se de ter a **JDK 21** ou superior instalada.
-3. Compile e execute a classe `central.java`.
-4. O sistema solicitará o caminho do arquivo `.csv`. (Utilize o arquivo de amostra fornecido no projeto).
+---
+
+## 3. Estrutura de Arquivos
+
+```text
+03 Analisador Dados Aneel/
+├── README.md
+└── src/
+    ├── central.java                   # CLI interativa, parser CSV e consultas Stream API
+    ├── LeitorCsv.java                 # Leitor genérico de arquivos CSV com Function<String, Optional<T>>
+    ├── BaseDeDados.java               # Record de domínio representando o registro da ANEEL
+    ├── FonteEnergia.java              # Sealed interface e records FonteRenovavel / FonteNaoRenovavel
+    ├── ArquivoInvalidoException.java  # Exceção checked para erros de I/O de arquivo
+    ├── LinhaCorrompidaException.java  # Exceção unchecked para linhas com colunas insuficientes
+    └── 234.csv                        # Base amostral de usinas geradoras para testes locais
+```
+
+---
+
+## 4. Como Compilar e Executar
+
+Requer **JDK 21** instalado. A partir da pasta `03 Analisador Dados Aneel`:
+
+```powershell
+cd "03 Analisador Dados Aneel/src"
+javac *.java
+java central
+```
+
+Quando solicitado pelo prompt interativo, informe o arquivo de amostra:
+```text
+Digite o caminho do arquivo CSV (ex: src/234.csv): 234.csv
+```
+*(Ou `src/234.csv` caso execute a partir do diretório pai `03 Analisador Dados Aneel`).*

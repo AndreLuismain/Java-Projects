@@ -11,3 +11,4 @@ public class InsufficientBalanceException extends PixException {
         super(message, HttpStatus.UNPROCESSABLE_ENTITY, "INSUFFICIENT_BALANCE");
     }
 }
+

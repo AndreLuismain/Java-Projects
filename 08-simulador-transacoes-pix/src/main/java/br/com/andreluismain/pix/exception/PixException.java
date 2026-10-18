@@ -24,3 +24,4 @@ public class PixException extends RuntimeException {
         return code;
     }
 }
+

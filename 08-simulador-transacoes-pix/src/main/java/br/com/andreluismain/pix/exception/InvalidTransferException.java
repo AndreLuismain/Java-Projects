@@ -11,3 +11,4 @@ public class InvalidTransferException extends PixException {
         super(message, HttpStatus.BAD_REQUEST, "INVALID_TRANSFER");
     }
 }
+

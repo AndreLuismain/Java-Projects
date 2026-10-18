@@ -168,3 +168,4 @@ public class WalletAccount {
         this.updatedAt = updatedAt;
     }
 }
+

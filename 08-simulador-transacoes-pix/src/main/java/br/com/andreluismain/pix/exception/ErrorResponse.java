@@ -13,3 +13,4 @@ public record ErrorResponse(
         String path,
         String traceId
 ) {}
+

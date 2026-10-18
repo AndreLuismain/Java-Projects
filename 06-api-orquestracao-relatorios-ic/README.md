@@ -1,35 +1,37 @@
-# 06 - API de Orquestracao de Relatorios para IC
+# 06 · API de Orquestração de Relatórios para Iniciação Científica
 
-## Objetivo
+Microsserviço backend em **Java 21** e **Spring Boot 3** projetado para receber apontamentos semanais de atividades de Iniciação Científica, classificar automaticamente o esforço por categoria acadêmica via **Agente LLM** (com fallback heurístico determinístico) e consolidar relatórios formais em **Markdown** voltados ao professor orientador.
 
-Microsservico Java para receber logs semanais de Iniciacao Cientifica, classificar o esforco com um agente LLM e gerar um relatorio Markdown estruturado para o professor orientador.
+> 📄 Especificação técnica detalhada e contratos de dados disponíveis em **[`TECH_SPEC.md`](./TECH_SPEC.md)**.
 
-## Tecnologias
+---
 
-- Java 21 e Spring Boot
-- Spring Web, Validation e Data JPA
-- H2 para persistencia relacional
-- Jackson e cliente HTTP para o LLM
-- JUnit 5, Mockito e Spring Boot Test
-- Maven
+## 1. Arquitetura e Destaques de Engenharia
 
-## Requisitos
+* **Idempotência de Submissão (`WeeklyLogService`):** Prevenção de duplicidade por combinação `(studentId, weekStartDate)` e hash SHA-256 do conteúdo.
+* **Classificação de Esforço com Resiliência (`LlmClassificationGateway` & `HeuristicLlmGateway`):** Categorização automática das atividades (`LITERATURE_REVIEW`, `IMPLEMENTATION`, `EXPERIMENTATION`, `WRITING`, `MEETING`, `OTHER`) garantindo que a soma das horas alocadas nas categorias corresponda exatamente ao `totalHoursReported`.
+* **Geração Estruturada de Relatórios (`MarkdownReportGenerator`):** Compilação determinística de documento Markdown com cabeçalho de metadados, tabela de distribuição de horas por categoria, síntese executiva, bloqueios e próximos passos.
+* **Versionamento de Schema:** Migrações controladas via **Flyway** (`V1__init.sql`).
 
-- JDK 21
-- Maven 3.9 ou superior
-- Chave da API do provedor LLM configurada em `LLM_API_KEY`
+---
 
-## Execucao
+## 2. Principais Endpoints REST
 
-```bash
-mvn clean verify
+| Método | Rota | Descrição |
+|---|---|---|
+| `POST` | `/api/v1/ic-reports/logs` | Registra um novo log semanal de atividades de IC com validação de horas e idempotência. |
+| `POST` | `/api/v1/ic-reports/logs/{logId}/generate` | Orquestra a classificação via LLM e gera o relatório consolidado em Markdown. |
+| `GET` | `/api/v1/ic-reports/logs/{logId}/report` | Retorna os metadados estruturados e o resumo do relatório gerado. |
+| `GET` | `/api/v1/ic-reports/logs/{logId}/report/markdown` | Exporta o conteúdo puro (`text/markdown`) pronto para envio ao orientador. |
+
+---
+
+## 3. Como Compilar, Testar e Executar
+
+```powershell
+cd 06-api-orquestracao-relatorios-ic
+mvn clean test
 mvn spring-boot:run
 ```
-
-A API sera disponibilizada em `http://localhost:8080`. O console H2 deve ficar habilitado somente em ambiente local.
-
-## Arquitetura
-
-A aplicacao separa controllers REST, casos de uso, repositorios JPA, gateway LLM e gerador de Markdown. O processamento da categorizacao deve ser assincrono, idempotente e auditavel.
-
-Consulte [TECH_SPEC.md](TECH_SPEC.md) para o contrato completo.
+* **API Base URL:** `http://localhost:8080`
+* **Swagger UI:** `http://localhost:8080/swagger-ui.html`

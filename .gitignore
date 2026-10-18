@@ -1,22 +1,28 @@
-# Maven
+# Maven & Build Outputs
 **/target/
+**/out/
+**/build/
 *.class
+*.jar
+*.war
 
-# IDEs
+# IDEs & Editors
 **/.idea/
-*.iml
-*.iws
-*.ipr
-.vscode/
-.settings/
-.classpath
-.project
-.factorypath
+**/*.iml
+**/*.iws
+**/*.ipr
+**/.vscode/
+**/.settings/
+**/.classpath
+**/.project
+**/.factorypath
 
-# Secrets & Local env
+# Secrets & Local Env
 .env
+.env.*
 *.local
 
-# OS
+# OS Specific
 Thumbs.db
 .DS_Store
+desktop.ini

@@ -15,3 +15,4 @@ public interface TransferRepository extends JpaRepository<Transfer, UUID> {
 
     Optional<Transfer> findByIdempotencyKey(String idempotencyKey);
 }
+

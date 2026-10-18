@@ -1,29 +1,39 @@
-# 07 - Agendamento de Laboratorios e Salas
+# 07 · Microsserviço de Agendamento de Laboratórios e Salas
 
-## Objetivo
+API REST em **Java 21** e **Spring Boot 3** para gestão de espaços acadêmicos (laboratórios e salas de estudo), consulta de janelas de disponibilidade, criação/cancelamento de reservas com **controle de concorrência pessimista no banco de dados** e exportação de relatórios semanais de ocupação em **CSV**.
 
-Microsservico para consultar disponibilidade, criar e cancelar reservas de laboratorios e salas de estudo com controle rigoroso de concorrencia no banco.
+> 📄 Especificação técnica detalhada disponível em **[`TECH_SPEC.md`](./TECH_SPEC.md)**.
 
-## Tecnologias
+---
 
-- Java 21 e Spring Boot
-- Spring Web, Validation e Data JPA
-- PostgreSQL ou H2 para testes
-- Flyway
-- JUnit 5, Mockito, Testcontainers e MockMvc
-- Maven
+## 1. Arquitetura e Destaques de Engenharia
 
-## Requisitos e execucao
+* **Prevenção de *Double-Booking* sob Concorrência (`BookingService` & `ResourceRepository`):** Aplicação de bloqueio pessimista (`@Lock(LockModeType.PESSIMISTIC_WRITE)` / `SELECT ... FOR UPDATE`) sobre o recurso acadêmico antes da verificação de interseção temporal (`startTime < existing.endTime AND endTime > existing.startTime`), garantindo exclusão mútua entre transações simultâneas.
+* **Regras de Domínio Estritas:** Validação de capacidade máxima do espaço (`attendeesCount <= capacity`), duração mínima/máxima da reserva e verificação de recurso ativo.
+* **Cálculo de Janelas Livres (`AvailabilityService`):** Algoritmo que subtrai intervalos reservados da janela operacional diária para retornar os slots disponíveis exatos.
+* **Exportação Analítica em CSV (`CsvExporter` & `WeeklyOccupancyReportService`):** Geração de relatório semanal com total de reservas, minutos ocupados e taxa percentual de ocupação por sala/laboratório.
 
-Necessarios JDK 21 e Maven 3.9+. Configure `DATABASE_URL`, `DATABASE_USERNAME` e `DATABASE_PASSWORD` quando usar PostgreSQL.
+---
 
-```bash
-mvn clean verify
+## 2. Principais Endpoints REST
+
+| Método | Rota | Descrição |
+|---|---|---|
+| `POST` | `/api/v1/resources` | Cadastra um novo laboratório ou sala de estudo. |
+| `GET` | `/api/v1/resources` | Lista os recursos acadêmicos cadastrados. |
+| `GET` | `/api/v1/resources/{id}/availability?date=YYYY-MM-DD` | Calcula os horários livres e ocupados do recurso na data informada. |
+| `POST` | `/api/v1/bookings` | Cria uma reserva com validação transacional e bloqueio pessimista contra conflitos de horário (`409 Conflict`). |
+| `DELETE` | `/api/v1/bookings/{id}` | Cancela uma reserva ativa registrando o motivo do cancelamento. |
+| `GET` | `/api/v1/reports/weekly-occupancy?weekStart=YYYY-MM-DD` | Exporta o relatório semanal de ocupação em formato `text/csv`. |
+
+---
+
+## 3. Como Compilar, Testar e Executar
+
+```powershell
+cd 07-agendamento-laboratorios-salas
+mvn clean test
 mvn spring-boot:run
 ```
-
-## Arquitetura
-
-A camada de dominio valida intervalos e regras de reserva; a camada de persistencia aplica transacao, indice de sobreposicao e bloqueio pessimista ou restricao equivalente. O relatorio semanal e produzido por uma consulta agregada e exportado como CSV.
-
-Consulte [TECH_SPEC.md](TECH_SPEC.md) para os contratos.
+* **API Base URL:** `http://localhost:8080`
+* **Swagger UI:** `http://localhost:8080/swagger-ui.html`

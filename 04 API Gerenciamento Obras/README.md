@@ -1,51 +1,72 @@
-# Distribution Works Management API
+# 04 · API de Gerenciamento de Obras, Distribuidoras e Custos
 
-A robust RESTful API built with Java and Spring Boot for managing distribution works, energy concessionaires, and detailed cost itemization. 
+API RESTful desenvolvida em **Java 21** e **Spring Boot 3** para o gerenciamento de concessionárias distribuidoras de energia, obras de infraestrutura elétrica e discriminação de itens de custo, utilizando **PostgreSQL**, **Flyway** e projeções otimizadas no banco de dados.
 
-This project serves as a structured foundation for processing and correlating infrastructural data, designed to ensure data consistency, clear separation of concerns, and high performance when querying aggregated costs.
+---
 
-## Tech Stack
+## 1. Visão Geral e Problema Resolvido
 
-* **Java 21:** Leveraging modern language features (like Records and pattern matching).
-* **Spring Boot 3:** Rapid application development, dependency injection, and web layer management.
-* **Spring Data JPA & Hibernate:** ORM for database interactions.
-* **PostgreSQL:** Primary relational database, chosen for its reliability and extensibility for future hybrid data architectures (e.g., JSONB integration for dynamic geographic or accounting assets).
-* **Flyway:** Database migration tool for version control of the database schema.
-* **Docker:** Containerization of the database to guarantee environment parity and a frictionless development setup.
-* **Lombok:** Boilerplate code reduction.
+Sistemas de gestão de infraestrutura elétrica exigem integridade referencial entre distribuidoras, obras e seus respectivos itens de custo (materiais, mão de obra, serviços), além de relatórios agregados de alto desempenho. Este projeto implementa uma arquitetura em camadas limpa que isola contratos HTTP via Java Records (DTOs), aplica migrações determinísticas de schema com Flyway e delega agregações financeiras diretamente ao motor do PostgreSQL via projeções JPA.
 
-## Architecture & Technical Justifications
+---
 
-The application strictly follows a **Layered Architecture** (Controller, Service, Repository) combined with modern Java practices.
+## 2. Tecnologias Utilizadas
 
-### 1. Separation of Concerns & Clean Controllers
-Controllers are kept strictly focused on HTTP routing and delegating work. There are **no `try-catch` blocks** or business logic inside the controllers. This allows the `Service` layer to act as the pure core of the application, where Java Functional Programming (`Streams`, `map`, `filter`) can be applied to process data before saving or returning it.
+* **Linguagem:** Java 21 LTS
+* **Framework:** Spring Boot 3 (Spring Web, Spring Data JPA, Jakarta Bean Validation)
+* **Banco de Dados:** PostgreSQL (orquestrado localmente via Docker Compose)
+* **Versionamento de Schema:** Flyway Migration (`V1__criar_tabelas_iniciais.sql`)
+* **Produtividade & Testes:** Lombok, Maven Wrapper (`mvnw`), JUnit 5
 
-### 2. DTO Pattern with Java Records
-Internal database entities (`@Entity`) are completely isolated from the external API contract. We use **Java Records** for DTOs (Data Transfer Objects). 
-* **Why?** Records provide built-in immutability, thread safety, and a much cleaner syntax. It prevents over-posting attacks and ensures the API only exposes or accepts exactly what is required.
+---
 
-### 3. Global Exception Handling (`@RestControllerAdvice`)
-Instead of scattering error handling throughout the code, the API uses a centralized `TratadorDeErrosGlobais`. 
-* **Why?** It ensures that the client always receives a standardized, predictable JSON error response (using a custom `ErroPadrao` record) regardless of where the application fails. It cleanly translates business exceptions (`IllegalArgumentException`) and validation errors (`@Valid`) into proper HTTP status codes (e.g., 400 Bad Request).
+## 3. Arquitetura e Decisões Técnicas
 
-### 4. Database Versioning with Flyway
-The database schema is not generated dynamically by Hibernate's `ddl-auto=update`. Instead, Flyway executes strict `.sql` migration scripts (`V1__criar_tabelas_iniciais.sql`).
-* **Why?** This provides a reliable, reproducible, and trackable database history, which is mandatory for production environments and prevents state inconsistencies across different developers' machines.
+1. **Separação Estrita de Responsabilidades (Layered Architecture):**
+   * **Controllers (`DistribuidoraController`, `ObraController`, `RelatorioController`):** Focados exclusivamente em roteamento HTTP, status codes semânticos (`201 Created` com header `Location`, `200 OK`, `204 No Content`) e delegação. Não contêm blocos `try-catch` nem lógica de negócio.
+   * **Services (`DistribuidoraService`, `ObraService`, `CustosService`, `RelatorioService`):** Concentram validações de domínio e transformações funcionais com `Stream API`.
+   * **Repositories (`DistribuidoraRepository`, `ObraRepository`, `ItemCustoRepository`):** Persistência JPA e consultas customizadas.
+2. **Padrão DTO com Java Records:**
+   * Isolamento das entidades JPA (`@Entity`) em relação aos payloads de entrada e saída, prevenindo exposição indevida do modelo relacional.
+3. **Tratamento Global de Exceções (`@RestControllerAdvice`):**
+   * Centralizado em `TratadorDeErrosGlobais`, convertendo erros de negócio e falhas de validação (`@Valid`) em respostas JSON padronizadas (`ErroPadrao`).
+4. **Agregação no SGBD via Projeções (`CustoPorDistribuidoraProjection`):**
+   * O cálculo do custo total agrupado por distribuidora é executado no PostgreSQL via `@Query`, evitando o carregamento de grafos completos de entidades na memória da JVM.
 
-### 5. Optimized Data Retrieval (Projections)
-For reporting endpoints (e.g., getting total costs grouped by distributor), the API uses Spring Data JPA `@Query` combined with interface-based Projections.
-* **Why?** Instead of fetching the entire heavy object graph (Distributor + all Works + all Cost Items) into memory and calculating it via Java, the calculation is pushed down to the PostgreSQL engine. The Projection only returns the exact columns needed (`nomeDistribuidora`, `custoTotal`), drastically reducing memory footprint and network latency.
+---
 
-## How to Run Locally
+## 4. Endpoints da API
 
-### Prerequisites
-* JDK 21
-* Docker & Docker Desktop
+| Método | Rota | Descrição |
+|---|---|---|
+| `GET` | `/api/distribuidoras` | Lista todas as distribuidoras cadastradas. |
+| `POST` | `/api/distribuidoras` | Cadastra uma nova distribuidora com validação Jakarta (`@Valid`). |
+| `GET` | `/api/obras?distribuidoraId={id}&custoMin={valor}` | Lista obras de uma distribuidora com filtro opcional de custo mínimo. |
+| `POST` | `/api/obras` | Registra uma nova obra vinculada a uma distribuidora e retorna a URI no cabeçalho `Location`. |
+| `GET` | `/api/obras/{id}/custos` | Lista os itens de custo (`ItemCusto`) vinculados a uma obra específica. |
+| `GET` | `/api/relatorios/custo-por-distribuidora` | Retorna a projeção agregada de custos totais por concessionária distribuidora. |
 
-### Setup Instructions
+---
 
-1. **Clone the repository:**
-```bash
-   git clone [https://github.com/your-username/Java-Projects.git](https://github.com/your-username/Java-Projects.git)
+## 5. Como Executar Localmente
+
+### Pré-requisitos
+* **JDK 21**
+* **Docker** e **Docker Compose**
+
+### Passo a Passo
+1. Acesse o diretório do projeto e inicie o container do PostgreSQL:
+   ```powershell
    cd "04 API Gerenciamento Obras"
+   docker-compose up -d
+   ```
+2. Compile e execute a aplicação via Maven Wrapper (as migrações do Flyway serão aplicadas automaticamente na inicialização):
+   ```powershell
+   .\mvnw.cmd spring-boot:run
+   ```
+3. Execute os testes automatizados:
+   ```powershell
+   .\mvnw.cmd test
+   ```
+
+A API estará disponível em `http://localhost:8080`.

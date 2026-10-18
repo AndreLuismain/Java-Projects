@@ -20,3 +20,4 @@ public record CreateAccountRequest(
         @PositiveOrZero(message = "Saldo inicial não pode ser negativo")
         Long initialBalanceInCents
 ) {}
+

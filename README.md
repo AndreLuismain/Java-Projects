@@ -1,80 +1,90 @@
-# Meus Projetos em Java
+# Java Backend & Engineering Portfolio (`Java-Projects`)
 
-Bem-vindo ao repositório de projetos em **Java**! 
+<div align="center">
 
-Este espaço é dedicado a documentar minha evolução na linguagem e a construção de uma sólida base de engenharia de software para desenvolvimento **Backend**, **Sistemas Distribuídos**, **Microsserviços** e **Arquiteturas Integradas com Inteligência Artificial**.
+[![Java 21](https://img.shields.io/badge/Java-21%20LTS-ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)](https://openjdk.org/projects/jdk/21/)
+[![Spring Boot 3](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F.svg?style=for-the-badge&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
+[![Spring WebFlux](https://img.shields.io/badge/Spring%20WebFlux-Reactive-6DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)](https://docs.spring.io/spring-framework/reference/web/webflux.html)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15%2B-316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![JUnit 5](https://img.shields.io/badge/JUnit%205-Tested-25A162.svg?style=for-the-badge&logo=junit5&logoColor=white)](https://junit.org/junit5/)
 
----
+</div>
 
-## 🚀 Tópicos e Conceitos Abordados
-
-Ao longo dos projetos, aplico padrões de design, boas práticas e conceitos avançados de engenharia:
-- **Padrões Arquiteturais:** Domain-Driven Design (DDD), Transactional Outbox, Append-Only Ledger, API Gateway, ETL Pipelines.
-- **Concorrência e Transacionalidade:** Bloqueio pessimista de escrita (`PESSIMISTIC_WRITE`), ordenação lexicográfica determinística anti-deadlock e controle otimista (`@Version`).
-- **Resiliência e Reatividade:** Spring WebFlux, WebClient não-bloqueante, Rate Limiting com algoritmo Token Bucket e fallbacks heurísticos.
-- **APIs RESTful e Validação:** Jakarta Bean Validation, contratos JSON padronizados com rastreabilidade via `X-Correlation-Id` e `traceId`.
-- **Qualidade e Testes:** Testes unitários abrangentes com JUnit 5 e Mockito, cobrindo cenários felizes, borda, concorrência e idempotência.
+Repositório central de engenharia de software **Backend em Java** desenvolvido por **André Luís** (Sistemas de Informação — **ICMC-USP**). Reúne **11 projetos independentes**, evoluindo desde a aplicação dos pilares de Programação Orientada a Objetos (POO) e Programação Funcional com Streams no Java 21 até microsserviços transacionais de missão crítica, gateways reativos e sistemas de orquestração de Agentes de Inteligência Artificial.
 
 ---
 
-## 📂 Projetos no Repositório
+## 🧭 Catálogo e Índice de Navegação dos Projetos
 
-### 🎯 Microsserviços e Engenharia de Software (Projetos 05 a 11)
-
-* **[11 - Motor de Recomendação de Pesquisas Acadêmicas](11-motor-recomendacao-pesquisas):**  
-  API Java com pipeline ETL (Extract com aliases heterogêneos, Transform com normalização canônica, Deduplicate por hash SHA-256 e Load), além de motor híbrido de recomendação combinando pontuação determinística (mínimo 60% do peso) com enriquecimento semântico.
-  - *Stack:* Java 21, Spring Boot 3.4+, Spring Data JPA, H2/PostgreSQL.
-
-* **[10 - Agente Documentador de Código Legado](10-agente-documentador-legado):**  
-  API REST que recebe arquivos legados (COBOL, Pascal, C, etc.), valida integridade contra path traversal e extensões perigosas, sanitiza credenciais e utiliza agentes de IA / analisadores sintáticos para gerar documentação técnica completa em Markdown estruturado, com cache por hash SHA-256.
-  - *Stack:* Java 21, Spring Boot 3.4+, Spring Web, Data JPA, Gemini API / Heurística estruturada.
-
-* **[09 - API Gateway de Agentes](09-api-gateway-agentes):**  
-  Gateway reativo que avalia a complexidade textual em tempo de execução (caracteres, estimativa de tokens, quebras estruturais e palavras-chave técnicas) e despacha requisições para processadores rápidos ou agentes robustos. Inclui rate limiter in-memory baseado no algoritmo Token Bucket (`429 Too Many Requests` + `Retry-After`) e propagação de Correlation ID.
-  - *Stack:* Java 21, Spring Boot 3.4+, Spring WebFlux, Reactor, WebClient.
-
-* **[08 - Simulador de Transações Pix](08-simulador-transacoes-pix):**  
-  API de carteira virtual com rigor financeiro (valores estritamente em centavos inteiros), bloqueio pessimista determinístico ordenado por UUID para eliminação de deadlocks, livro-razão imutável (append-only ledger), idempotência estrita via cabeçalho `Idempotency-Key` e padrão Transactional Outbox para eventos de transferências acima do limite de segurança.
-  - *Stack:* Java 21, Spring Boot 3.4+, Spring Data JPA, Flyway, H2/PostgreSQL.
-
-* **[07 - Agendamento de Laboratórios e Salas](07-agendamento-laboratorios-salas):**  
-  Microsserviço de reservas de recursos físicos acadêmicos com prevenção de sobreposição de intervalos temporais via bloqueio pessimista no banco de dados (`findByIdWithLock`), validações de antecedência/duração e exportação de relatórios semanais de utilização em formato CSV em conformidade com o padrão RFC 4180.
-  - *Stack:* Java 21, Spring Boot 3.4+, Spring Data JPA, H2/PostgreSQL.
-
-* **[06 - API de Orquestração de Relatórios para IC](06-api-orquestracao-relatorios-ic):**  
-  Microsserviço que processa logs semanais de pesquisa de Iniciação Científica, categoriza atividades de forma inteligente (Pesquisa, Desenvolvimento, Estudo, Reunião, Documentação) e orquestra a geração de relatórios consolidados em Markdown prontos para submissão a agências de fomento.
-  - *Stack:* Java 21, Spring Boot 3.4+, Spring Web, Data JPA, H2/PostgreSQL.
-
-* **[05 - Agente Analisador de Editais de IC](analisador-editais-ic):**  
-  API Java com Spring Boot que coleta editais públicos, extrai conteúdo com Jsoup e usa inteligência artificial para resumir, analisar elegibilidade e classificar oportunidades de pesquisa conforme o perfil do estudante.
-  - *Stack:* Java 21, Spring Boot 3.4+, Jsoup, Spring Data JPA, Gemini Pro / Heurística.
+| # | Projeto / Diretório | Stack Principal | Conceitos de Engenharia Aplicados | Especificação |
+|:---:|---|---|---|:---:|
+| **11** | **[`11-motor-recomendacao-pesquisas`](./11-motor-recomendacao-pesquisas/)** | Java 21, Spring Boot 3, JPA, H2/PostgreSQL | Pipeline ETL (Extração, Normalização e Deduplicação SHA-256), Scoring Híbrido (70% Determinístico + 30% Semântico via LLM) e Fallback Transparente. | [`TECH_SPEC.md`](./11-motor-recomendacao-pesquisas/TECH_SPEC.md) |
+| **10** | **[`10-agente-documentador-legado`](./10-agente-documentador-legado/)** | Java 21, Spring Boot 3, JPA, Flyway | Segurança em Uploads (Prevenção de *Path Traversal*), Sanitização Regex de Credenciais (`[REDACTED_SECRET]`), Cache Idempotente por Hash SHA-256 e Geração de Markdown. | [`TECH_SPEC.md`](./10-agente-documentador-legado/TECH_SPEC.md) |
+| **09** | **[`09-api-gateway-agentes`](./09-api-gateway-agentes/)** | Java 21, Spring WebFlux, Project Reactor | Arquitetura Reativa Não-Bloqueante, Rate Limiting Thread-Safe (*Token Bucket* com `429` e `Retry-After`), Classificador de Complexidade Textual e Propagação de `X-Correlation-Id`. | [`TECH_SPEC.md`](./09-api-gateway-agentes/TECH_SPEC.md) |
+| **08** | **[`08-simulador-transacoes-pix`](./08-simulador-transacoes-pix/)** | Java 21, Spring Boot 3, JPA, Flyway | Precisão Monetária em Centavos (`Long`), Prevenção Determinística de Deadlocks (`SELECT FOR UPDATE` ordenado por UUID), *Append-Only Ledger* (Partidas Dobradas), Idempotência Estrita e *Transactional Outbox*. | [`TECH_SPEC.md`](./08-simulador-transacoes-pix/TECH_SPEC.md) |
+| **07** | **[`07-agendamento-laboratorios-salas`](./07-agendamento-laboratorios-salas/)** | Java 21, Spring Boot 3, JPA, Flyway | Controle de Concorrência Pessimista (`PESSIMISTIC_WRITE`) contra *Double-Booking*, Cálculo de Interseção de Intervalos Temporais e Exportação Analítica em CSV. | [`TECH_SPEC.md`](./07-agendamento-laboratorios-salas/TECH_SPEC.md) |
+| **06** | **[`06-api-orquestracao-relatorios-ic`](./06-api-orquestracao-relatorios-ic/)** | Java 21, Spring Boot 3, JPA, Flyway | Ingestão Idempotente de Logs Semanais de IC, Classificação de Esforço por Categoria via Agente LLM com Fallback Heurístico e Compilação de Relatórios Markdown. | [`TECH_SPEC.md`](./06-api-orquestracao-relatorios-ic/TECH_SPEC.md) |
+| **05** | **[`analisador-editais-ic`](./analisador-editais-ic/)** | Java 21, Spring Boot 3, WebFlux, Jsoup, PostgreSQL | Web Scraping Seguro (Defesa Anti-SSRF contra IPs privados/loopback e Rate Limiting por domínio), Processamento Assíncrono (`@Async`) e Integração com Google Gemini API. | [`TECH_SPEC.md`](./analisador-editais-ic/TECH_SPEC.md) |
+| **04** | **[`04 API Gerenciamento Obras`](./04%20API%20Gerenciamento%20Obras/)** | Java 21, Spring Boot 3, PostgreSQL, Flyway, Docker | Arquitetura em Camadas Limpa, DTOs com Java Records, `@RestControllerAdvice` Global e Agregação Financeira no SGBD via Projeções JPA (`CustoPorDistribuidoraProjection`). | [README Local](./04%20API%20Gerenciamento%20Obras/README.md) |
+| **03** | **[`03 Analisador Dados Aneel`](./03%20Analisador%20Dados%20Aneel/)** | Java 21 Standard Edition | Parser CSV Tolerante a Aspas, *Records*, *Sealed Interfaces*, *Pattern Matching for `switch`*, *Generics* com `Function<String, Optional<T>>`, `Stream API` e `TreeMap`. | [README Local](./03%20Analisador%20Dados%20Aneel/README.md) |
+| **02** | **[`02 API de gerenciamento RPG`](./02%20API%20de%20gerenciamento%20RPG/)** | Java 17, Spring Boot 3.3.4, PostgreSQL, Docker | API REST CRUD completa, Isolamento de Entidades com DTOs, Documentação Interativa Swagger/OpenAPI e Conteinerização com Dockerfile para Deploy Cloud. | [README Local](./02%20API%20de%20gerenciamento%20RPG/README.md) |
+| **01** | **[`01 Mini RPG`](./01%20Mini%20RPG/)** | Java Standard Edition | Fundamentos de Programação Orientada a Objetos (POO): Herança (`extends`), Polimorfismo (`@Override`), Encapsulamento (`protected`/`private`) e Membros Estáticos (`static`). | [README Local](./01%20Mini%20RPG/README.md) |
 
 ---
 
-### 🧩 Fundamentos e Primeiras APIs (Projetos 01 a 04)
+## 🏗️ Padrões Arquiteturais e Pilares de Engenharia Demonstrados
 
-* **[04 - Gerenciamento de Obras, Distribuidoras e Custos](04%20API%20Gerenciamento%20Obras):**  
-  API RESTful para análise de dados interligados entre distribuidoras elétricas, obras e custos encadeados.
-* **[03 - Analisador de Dados Aneel (CSV)](03%20Analisador%20Dados%20Aneel):**  
-  Processador e analisador de arquivos CSV governamentais com filtros e agregação utilizando Java Streams.
-* **[02 - API de Gerenciamento RPG](02%20API%20de%20gerenciamento%20RPG):**  
-  API RESTful com persistência relacional (PostgreSQL), Swagger/OpenAPI e regras de domínio de RPG.
-* **[01 - Mini RPG](01%20Mini%20RPG):**  
-  Simulador em linha de comando focado na aplicação pura de Programação Orientada a Objetos (Herança, Polimorfismo, Encapsulamento).
+1. **Consistência Transacional e Concorrência no Banco de Dados:**
+   * Bloqueio pessimista (`LockModeType.PESSIMISTIC_WRITE`) com ordenação lexicográfica determinística de chaves para eliminar *deadlocks* em transferências simultâneas ([Projeto 08](./08-simulador-transacoes-pix/)) e impedir reservas conflitantes de recursos ([Projeto 07](./07-agendamento-laboratorios-salas/)).
+   * Livro-razão contábil imutável (*Append-Only Ledger*) com invariante de soma zero e *Transactional Outbox* para publicação confiável de alertas antifraude ([Projeto 08](./08-simulador-transacoes-pix/)).
+
+2. **Sistemas Reativos, Resiliência e Rate Limiting:**
+   * Pipeline reativo não-bloqueante com **Spring WebFlux** e **Project Reactor**, controle de taxa em memória via **Token Bucket** com cabeçalho `Retry-After` e rastreamento distribuído por `X-Correlation-Id` ([Projeto 09](./09-api-gateway-agentes/)).
+
+3. **Engenharia de Agentes de IA e Pipelines ETL Seguros:**
+   * Defesa contra **SSRF (Server-Side Request Forgery)** na coleta de páginas externas ([Projeto 05](./analisador-editais-ic/)) e contra **Path Traversal** e vazamento de credenciais em códigos-fonte legados ([Projeto 10](./10-agente-documentador-legado/)).
+   * Esteira **ETL** com normalização, deduplicação por impressão digital SHA-256 e ranqueamento híbrido combinando regras determinísticas e avaliação semântica via LLM ([Projeto 11](./11-motor-recomendacao-pesquisas/)).
 
 ---
 
-## 🛠️ Como Executar os Projetos
+## 🛠️ Tecnologias Utilizadas
 
-Cada microsserviço (projetos 05 a 11) é um projeto Maven autônomo. Para executá-los ou rodar os testes:
+* **Linguagens:** Java 21 LTS, Java 17 LTS, SQL
+* **Ecossistema Spring:** Spring Boot 3.x, Spring Web MVC, Spring WebFlux (Project Reactor), Spring Data JPA (Hibernate 6), Jakarta Bean Validation
+* **Bancos de Dados & Migrações:** PostgreSQL 15+, H2 Database, Flyway Migration
+* **Documentação & Integração:** Springdoc OpenAPI 3 (Swagger UI), Jsoup, Jackson, Google Gemini API
+* **Testes & Qualidade:** JUnit 5, Mockito, AssertJ, MockMvc, WebTestClient, MockWebServer
+* **Infraestrutura & Build:** Apache Maven, Docker, Docker Compose
 
-```bash
-# Entrar na pasta do projeto desejado:
+---
+
+## 🚀 Como Compilar e Executar os Projetos
+
+Cada subpasta é um projeto isolado e autocontido.
+
+### Para Microsserviços e APIs Spring Boot (Projetos 02, 04, 05, 06, 07, 08, 09, 10 e 11)
+Acesse o diretório do projeto desejado e utilize o Maven (ou o wrapper `./mvnw`):
+```powershell
 cd 08-simulador-transacoes-pix
-
-# Executar testes unitários e de integração:
-./mvnw clean test
-
-# Inicializar o serviço:
-./mvnw spring-boot:run
+mvn clean test
+mvn spring-boot:run
 ```
+A aplicação iniciará por padrão em `http://localhost:8080` (com documentação interativa em `http://localhost:8080/swagger-ui.html` nos projetos equipados com Springdoc OpenAPI).
+
+### Para Aplicações Console Core Java (Projetos 01 e 03)
+Compile e execute diretamente com `javac` e `java` (JDK 21):
+```powershell
+# Exemplo: Projeto 03 (Analisador de Dados ANEEL)
+cd "03 Analisador Dados Aneel/src"
+javac *.java
+java central
+```
+
+---
+
+## 👤 Autor
+
+**André Luís da Silva Souza**  
+Graduando em Sistemas de Informação — **ICMC · Universidade de São Paulo (USP)**  
+- GitHub: [@AndreLuismain](https://github.com/AndreLuismain)
+- Email: [andreluis.souza@usp.br](mailto:andreluis.souza@usp.br)

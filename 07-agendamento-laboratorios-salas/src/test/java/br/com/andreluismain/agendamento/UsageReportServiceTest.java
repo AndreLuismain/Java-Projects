@@ -62,3 +62,4 @@ class UsageReportServiceTest {
         assertTrue(csv.contains("120")); // 2 hours = 120 minutes
     }
 }
+

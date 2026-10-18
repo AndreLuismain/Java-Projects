@@ -7,3 +7,4 @@ public enum LedgerEntryType {
     DEBIT,
     CREDIT
 }
+
