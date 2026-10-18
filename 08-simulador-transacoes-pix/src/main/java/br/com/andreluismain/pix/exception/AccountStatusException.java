@@ -11,4 +11,3 @@ public class AccountStatusException extends PixException {
         super(message, HttpStatus.UNPROCESSABLE_ENTITY, "ACCOUNT_INACTIVE");
     }
 }
-

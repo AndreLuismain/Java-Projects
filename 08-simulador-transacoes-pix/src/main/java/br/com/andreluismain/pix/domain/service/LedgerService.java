@@ -37,4 +37,3 @@ public class LedgerService {
                 .map(LedgerEntryResponse::from);
     }
 }
-

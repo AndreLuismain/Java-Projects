@@ -57,4 +57,3 @@ public class AccountController {
         return ResponseEntity.ok(ledgerService.getStatement(id, pageable));
     }
 }
-

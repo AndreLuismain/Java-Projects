@@ -1,0 +1,20 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: api-gateway-agentes
+
+gateway:
+  fast-processor-url: ${FAST_PROCESSOR_URL:http://localhost:8081}
+  robust-processor-url: ${ROBUST_PROCESSOR_URL:http://localhost:8082}
+  rate-limit-capacity: ${RATE_LIMIT_CAPACITY:10}
+  rate-limit-refill-per-second: ${RATE_LIMIT_REFILL_PER_SECOND:2}
+  complexity-threshold: ${COMPLEXITY_THRESHOLD:50}
+  min-text-length: ${MIN_TEXT_LENGTH:5}
+  max-text-length: ${MAX_TEXT_LENGTH:20000}
+  timeout-seconds: ${GATEWAY_TIMEOUT_SECONDS:5}
+
+logging:
+  level:
+    br.com.andreluismain.gateway: INFO

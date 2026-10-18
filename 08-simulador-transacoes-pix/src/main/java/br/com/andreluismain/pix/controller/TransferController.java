@@ -42,4 +42,3 @@ public class TransferController {
         return ResponseEntity.ok(transferService.getTransferById(id));
     }
 }
-

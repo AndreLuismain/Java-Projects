@@ -8,4 +8,3 @@ public enum AccountStatus {
     SUSPENDED,
     CLOSED
 }
-

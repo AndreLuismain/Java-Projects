@@ -16,4 +16,3 @@ public class AccountNotFoundException extends PixException {
         super("Conta com chave Pix informada não encontrada", HttpStatus.NOT_FOUND, "ACCOUNT_NOT_FOUND");
     }
 }
-

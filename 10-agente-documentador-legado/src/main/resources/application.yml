@@ -1,0 +1,48 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: agente-documentador-legado
+  datasource:
+    url: ${DATABASE_URL:jdbc:h2:mem:documentadordb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL}
+    username: ${DATABASE_USERNAME:sa}
+    password: ${DATABASE_PASSWORD:}
+    driver-class-name: ${DATABASE_DRIVER:org.h2.Driver}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: false
+    show-sql: false
+  flyway:
+    enabled: false
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 5MB
+
+documentador:
+  prompt-version: v1.0
+  max-file-size: 2097152
+  allowed-extensions:
+    - java
+    - c
+    - cpp
+    - cbl
+    - cob
+    - pas
+    - py
+    - js
+    - sql
+    - sh
+    - php
+
+llm:
+  api-key: ${LLM_API_KEY:mock-key}
+  model: ${LLM_MODEL:gemini-1.5-pro}
+
+logging:
+  level:
+    br.com.andreluismain.documentador: INFO

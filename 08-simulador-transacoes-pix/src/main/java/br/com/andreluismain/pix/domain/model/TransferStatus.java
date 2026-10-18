@@ -8,4 +8,3 @@ public enum TransferStatus {
     REJECTED,
     FAILED
 }
-

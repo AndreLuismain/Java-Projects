@@ -118,4 +118,3 @@ public class Transfer {
         this.createdAt = createdAt;
     }
 }
-

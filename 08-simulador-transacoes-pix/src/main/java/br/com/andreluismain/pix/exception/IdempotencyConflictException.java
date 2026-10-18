@@ -11,4 +11,3 @@ public class IdempotencyConflictException extends PixException {
         super(message, HttpStatus.CONFLICT, "IDEMPOTENCY_CONFLICT");
     }
 }
-

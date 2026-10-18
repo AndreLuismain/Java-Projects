@@ -28,4 +28,3 @@ public interface WalletAccountRepository extends JpaRepository<WalletAccount, UU
     @Query("SELECT a FROM WalletAccount a WHERE a.id = :id")
     Optional<WalletAccount> findByIdWithLock(@Param("id") UUID id);
 }
-

@@ -43,4 +43,3 @@ CREATE TABLE outbox_events (
     created_at TIMESTAMP NOT NULL,
     published_at TIMESTAMP
 );
-

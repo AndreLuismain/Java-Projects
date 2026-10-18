@@ -25,4 +25,3 @@ pix:
 logging:
   level:
     br.com.andreluismain.pix: INFO
-
