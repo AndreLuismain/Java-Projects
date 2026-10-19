@@ -2,7 +2,7 @@
 
 API financeira em **Java 21** e **Spring Boot 3** que simula transferências instantâneas Pix entre carteiras digitais com **consistência transacional ACID**, **prevenção determinística de deadlocks**, **livro-razão contábil imutável (*Append-Only Ledger*)**, **idempotência estrita** e **Transactional Outbox** para eventos antifraude.
 
-> 📄 Especificação técnica detalhada disponível em **[`TECH_SPEC.md`](./TECH_SPEC.md)**.
+> Especificação técnica detalhada disponível em **[`TECH_SPEC.md`](./TECH_SPEC.md)**.
 
 ---
 

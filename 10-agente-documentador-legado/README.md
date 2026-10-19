@@ -2,7 +2,7 @@
 
 API REST em **Java 21** e **Spring Boot 3** projetada para receber códigos-fonte legados (C, COBOL, Pascal, Java, Python, SQL), aplicar **defesa em profundidade na ingestão de arquivos** (proteção contra *Path Traversal*, validação de extensões e sanitização de segredos) e gerar documentação técnica estruturada em **Markdown** com cache idempotente por hash SHA-256.
 
-> 📄 Especificação técnica detalhada disponível em **[`TECH_SPEC.md`](./TECH_SPEC.md)**.
+> Especificação técnica detalhada disponível em **[`TECH_SPEC.md`](./TECH_SPEC.md)**.
 
 ---
 

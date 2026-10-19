@@ -2,7 +2,7 @@
 
 API REST em **Java 21** e **Spring Boot 3** que executa um pipeline **ETL (Extração, Transformação, Normalização e Deduplicação)** sobre oportunidades de Iniciação Científica e calcula um **ranking explicável de compatibilidade** para perfis de estudantes, combinando **scoring determinístico multi-critério** e **scoring semântico via LLM**.
 
-> 📄 Especificação técnica detalhada disponível em **[`TECH_SPEC.md`](./TECH_SPEC.md)**.
+> Especificação técnica detalhada disponível em **[`TECH_SPEC.md`](./TECH_SPEC.md)**.
 
 ---
 

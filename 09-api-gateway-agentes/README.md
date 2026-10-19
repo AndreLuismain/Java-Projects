@@ -2,7 +2,7 @@
 
 Gateway reativo não-bloqueante desenvolvido em **Java 21**, **Spring WebFlux** e **Project Reactor** que analisa em tempo real a complexidade de payloads textuais, aplica controle de taxa (**Token Bucket Rate Limiting**) por cliente e roteia dinamicamente cada requisição entre um processador rápido (`FAST_PATH`) e um agente de IA profundo (`ROBUST_AGENT`).
 
-> 📄 Especificação técnica detalhada disponível em **[`TECH_SPEC.md`](./TECH_SPEC.md)**.
+> Especificação técnica detalhada disponível em **[`TECH_SPEC.md`](./TECH_SPEC.md)**.
 
 ---
 

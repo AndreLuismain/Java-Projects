@@ -2,7 +2,7 @@
 
 API REST em **Java 21** e **Spring Boot 3** para coleta automatizada de editais acadêmicos públicos na web, extração higienizada de conteúdo HTML com **Jsoup** (com proteção anti-SSRF e Rate Limiting por domínio) e análise semântica assíncrona via **Google Gemini API** para classificar a aderência de oportunidades ao perfil de estudantes e pesquisadores.
 
-> 📄 A especificação técnica completa de arquitetura, modelo de dados, contratos REST e critérios de aceite está disponível em **[`TECH_SPEC.md`](./TECH_SPEC.md)**.
+> A especificação técnica completa de arquitetura, modelo de dados, contratos REST e critérios de aceite está disponível em **[`TECH_SPEC.md`](./TECH_SPEC.md)**.
 
 ---
 

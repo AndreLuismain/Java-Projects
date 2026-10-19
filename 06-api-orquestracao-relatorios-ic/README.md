@@ -2,7 +2,7 @@
 
 Microsserviço backend em **Java 21** e **Spring Boot 3** projetado para receber apontamentos semanais de atividades de Iniciação Científica, classificar automaticamente o esforço por categoria acadêmica via **Agente LLM** (com fallback heurístico determinístico) e consolidar relatórios formais em **Markdown** voltados ao professor orientador.
 
-> 📄 Especificação técnica detalhada e contratos de dados disponíveis em **[`TECH_SPEC.md`](./TECH_SPEC.md)**.
+> Especificação técnica detalhada e contratos de dados disponíveis em **[`TECH_SPEC.md`](./TECH_SPEC.md)**.
 
 ---
 

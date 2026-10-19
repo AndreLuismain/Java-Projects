@@ -52,9 +52,3 @@ A aplicação segue o padrão de arquitetura em camadas para garantir a separaç
 
 A API estará disponível em http://localhost:8080.
 
-## Autor
-André Luís
-
-Estudante de Sistemas de Informação - ICMC/USP
-
-GitHub: https://github.com/AndreLuismain

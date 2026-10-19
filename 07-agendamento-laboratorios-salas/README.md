@@ -2,7 +2,7 @@
 
 API REST em **Java 21** e **Spring Boot 3** para gestão de espaços acadêmicos (laboratórios e salas de estudo), consulta de janelas de disponibilidade, criação/cancelamento de reservas com **controle de concorrência pessimista no banco de dados** e exportação de relatórios semanais de ocupação em **CSV**.
 
-> 📄 Especificação técnica detalhada disponível em **[`TECH_SPEC.md`](./TECH_SPEC.md)**.
+> Especificação técnica detalhada disponível em **[`TECH_SPEC.md`](./TECH_SPEC.md)**.
 
 ---
 
