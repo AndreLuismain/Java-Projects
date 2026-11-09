@@ -42,7 +42,7 @@ A aplicação segue o padrão de arquitetura em camadas para garantir a separaç
    git clone https://github.com/AndreLuismain/Java-Projects.git
 
 2. Acesse o diretório do projeto:
-   cd "02 API de gerenciamento RPG/api"
+   cd "02-API de gerenciamento RPG/api"
 
 3. Compile o projeto e gere o arquivo executável:
    mvn clean install

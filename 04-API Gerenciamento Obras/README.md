@@ -57,7 +57,7 @@ Sistemas de gestão de infraestrutura elétrica exigem integridade referencial e
 ### Passo a Passo
 1. Acesse o diretório do projeto e inicie o container do PostgreSQL:
    ```powershell
-   cd "04 API Gerenciamento Obras"
+   cd "04-API Gerenciamento Obras"
    docker-compose up -d
    ```
 2. Compile e execute a aplicação via Maven Wrapper (as migrações do Flyway serão aplicadas automaticamente na inicialização):

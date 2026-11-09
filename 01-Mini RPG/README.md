@@ -23,7 +23,7 @@ Modelar uma hierarquia de personagens de RPG (`Personagem`, `Guerreiro` e `Mago`
 ## 3. Estrutura do Código
 
 ```text
-01 Mini RPG/
+01-Mini RPG/
 ├── README.md
 └── main.java/
     └── src/
@@ -37,7 +37,7 @@ Modelar uma hierarquia de personagens de RPG (`Personagem`, `Guerreiro` e `Mago`
 Certifique-se de possuir o **JDK 17+** instalado no ambiente. No terminal:
 
 ```powershell
-cd "01 Mini RPG/main.java/src"
+cd "01-Mini RPG/main.java/src"
 javac Main.java
 java Main
 ```

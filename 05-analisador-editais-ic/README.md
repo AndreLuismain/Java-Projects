@@ -55,13 +55,13 @@ GEMINI_MODEL=gemini-pro
 
 ### Executar Testes Automatizados
 ```powershell
-cd analisador-editais-ic
+cd 05-analisador-editais-ic
 mvn clean test
 ```
 
 ### Subir Banco PostgreSQL e Executar a API
 ```powershell
-cd analisador-editais-ic
+cd 05-analisador-editais-ic
 docker-compose up -d
 mvn spring-boot:run
 ```

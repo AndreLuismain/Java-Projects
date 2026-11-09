@@ -29,7 +29,7 @@ Realizar a leitura resiliente de bases tabulares brutas (`.csv`) contendo dados 
 ## 3. Estrutura de Arquivos
 
 ```text
-03 Analisador Dados Aneel/
+03-Analisador Dados Aneel/
 ├── README.md
 └── src/
     ├── central.java                   # CLI interativa, parser CSV e consultas Stream API
@@ -45,10 +45,10 @@ Realizar a leitura resiliente de bases tabulares brutas (`.csv`) contendo dados 
 
 ## 4. Como Compilar e Executar
 
-Requer **JDK 21** instalado. A partir da pasta `03 Analisador Dados Aneel`:
+Requer **JDK 21** instalado. A partir da pasta `03-Analisador Dados Aneel`:
 
 ```powershell
-cd "03 Analisador Dados Aneel/src"
+cd "03-Analisador Dados Aneel/src"
 javac *.java
 java central
 ```
@@ -57,4 +57,4 @@ Quando solicitado pelo prompt interativo, informe o arquivo de amostra:
 ```text
 Digite o caminho do arquivo CSV (ex: src/234.csv): 234.csv
 ```
-*(Ou `src/234.csv` caso execute a partir do diretório pai `03 Analisador Dados Aneel`).*
+*(Ou `src/234.csv` caso execute a partir do diretório pai `03-Analisador Dados Aneel`).*

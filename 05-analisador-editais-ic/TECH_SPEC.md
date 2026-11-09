@@ -24,7 +24,7 @@ O sistema deve separar coleta, extracao, normalizacao, analise de linguagem e pe
 ## 3. Arquitetura de pastas
 
 ```text
-analisador-editais-ic/
+05-analisador-editais-ic/
   pom.xml
   README.md
   docker-compose.yml

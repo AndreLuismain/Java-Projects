@@ -13,7 +13,7 @@
     <groupId>br.com.andreluismain</groupId>
     <artifactId>analisador-editais-ic</artifactId>
     <version>1.0.0</version>
-    <name>analisador-editais-ic</name>
+    <name>05-analisador-editais-ic</name>
     <description>API REST para analise e classificacao de editais de Iniciacao Cientifica com Gemini Pro</description>
 
     <properties>
