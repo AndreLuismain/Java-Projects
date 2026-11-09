@@ -18,24 +18,31 @@ public class Obra {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //add name column
+    // length faz sentido aqui pois é uma String (VARCHAR)
     @Column(nullable = false, length = 500)
     private String descricao;
 
-    //add name column
-    @Column(nullable = false, length = 500)
+    // Removido o length 500 (não se aplica a datas)
+    @Column(nullable = false)
     private LocalDate dataInicio;
 
-    //add name column
-    @Column(nullable = false, length = 500)
+    // Removido o length 500 (não se aplica a datas)
+    @Column(nullable = false)
     private LocalDate dataFim;
 
-    //add name column
-    @Column(nullable = false, length = 500)
+    // Removido o length 500 (para BigDecimal, use precision/scale se necessário)
+    @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal custoTotal;
 
-    //add name column
     @ManyToOne
     @JoinColumn(name = "distribuidora_id", nullable = false)
     private Distribuidora distribuidora;
+
+    //Apostila Task 1.3
+    public void atualizarCusto(BigDecimal novoCusto){
+        if (novoCusto == null || novoCusto.compareTo(BigDecimal.ZERO) <= 0 ){
+            throw new IllegalArgumentException("O custo tem que ser maior que zero!");
+        }
+        this.custoTotal = novoCusto;
+    }
 }

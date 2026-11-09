@@ -26,10 +26,4 @@ public class CustosService {
         }
         return itemCustoRepository.findByObraId(obraId);
     }
-
-    //Retorna custo total agrupado usando @Query
-
-
-
-
 }

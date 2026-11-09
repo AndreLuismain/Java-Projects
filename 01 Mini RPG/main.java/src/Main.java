@@ -10,10 +10,17 @@ class Personagem{
     private static int totalPersonagens = 0;
     //Construtor
     public Personagem(String nome, int vida){
+        if(nome == null || nome.isBlank() || vida <= 0){
+            throw new IllegalArgumentException("Nome inválido ou vida menor/igual a zero.");
+        }
         this.nome = nome;
         this.vida = vida;
         totalPersonagens++;
     }
+    public Personagem(String nome){
+        this(nome, 100);
+    }
+
     public void atacar() {
         System.out.println(nome + " atacou um personagem! ");
     }
